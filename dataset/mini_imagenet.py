@@ -52,13 +52,13 @@ class MiniImagenetDataset(Dataset):
             image2 = os.path.join(class_path2, random.choice(image_paths2))
 
         # read image
-        print(image1)
-        print(image2)
         image1 = cv2.imread(image1)
         image2 = cv2.imread(image2)
-
+        image1 = cv2.cvtColor(image1, cv2.COLOR_BGR2RGB)
+        image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
         # apply transform and make tensor
         img1 = self.transform(image=image1)['image']
         img2 = self.transform(image=image2)['image']
-
+        img1 = img1.float() / 255.0
+        img2 = img2.float() / 255.0
         return img1, img2, label

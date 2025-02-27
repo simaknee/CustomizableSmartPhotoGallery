@@ -10,14 +10,13 @@ class SiameseNetwork(nn.Module):
 
                 backbone: a backbone network name
         """
-        super.__init__()
+        super().__init__()
 
         if backbone not in dir(torchvision.models):
             raise (f"{backbone} is not a supported backbone model")
 
         self.feature_extractor = getattr(
             torchvision.models, backbone)(pretrained=True)
-        self.feature_extractor.modules
         out_features = list(self.feature_extractor.modules())[-1].out_features
         self.classifier = nn.Sequential(
             nn.Dropout(0.5),
@@ -45,6 +44,7 @@ class SiameseNetwork(nn.Module):
                 output: tensor with shape=[batch * 1]
 
         """
+
         feat1 = self.feature_extractor(img1)
         feat2 = self.feature_extractor(img2)
 
