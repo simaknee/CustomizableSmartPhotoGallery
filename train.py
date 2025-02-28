@@ -53,9 +53,9 @@ if __name__ == "__main__":
         # training
         for x1, x2, y in train_dataloader:
             if use_gpu:
-                x1.to(args.device)
-                x2.to(args.device)
-                y.to(args.device)
+                x1 = x1.to(args.device)
+                x2 = x2.to(args.device)
+                y = y.to(args.device)
             y_pred = model(x1, x2)
             loss = criterion(y_pred, y.unsqueeze(1).float())
             optimizer.zero_grad()
@@ -76,6 +76,10 @@ if __name__ == "__main__":
 
         # validation
         for x1, x2, y in val_dataloader:
+            if use_gpu:
+                x1 = x1.to(args.device)
+                x2 = x2.to(args.device)
+                y = y.to(args.device)
             y_pred = model(x1, x2)
             loss = criterion(y_pred, y.unsqueeze(1).float())
 
