@@ -24,8 +24,8 @@ if __name__ == "__main__":
     train_dataset = MiniImagenetDataset(args.train_path, k=1, n=5)
     val_dataset = MiniImagenetDataset(args.val_path, k=1, n=5)
 
-    train_dataloader = DataLoader(train_dataset, batch_size=4, drop_last=True)
-    val_dataloader = DataLoader(val_dataset, batch_size=4)
+    train_dataloader = DataLoader(train_dataset, batch_size=16, drop_last=True)
+    val_dataloader = DataLoader(val_dataset, batch_size=16)
 
     # load model
     model = SiameseNetwork()
